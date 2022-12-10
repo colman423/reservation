@@ -1,0 +1,100 @@
+<!doctype html>
+<html>
+
+<head>
+  <title>桃園國民運動中心 快速預約</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+
+<body style="word-break: break-word; overflow-x: hidden;">
+  <div>
+    step1 先
+    <a href="https://scr.cyc.org.tw/tp13.aspx?module=ind&files=ind" target="_blank">登入桃園運動中心</a>
+    <br />
+    登入完後再回來這頁
+  </div>
+  <br />
+
+  <div>
+    step2 選擇預約球種 (只有羽球)
+    <br />
+    <select class="form-control" id="sports" disabled>
+      <option value="1">羽球</option>
+      <option value="3">桌球</option>
+    </select>
+  </div>
+  <br />
+
+  <div>
+    step3 輸入預約日期 格式為yyyy/mm/dd (*要14天內的場地才可以預約)
+    <br />
+    <input class="form-control" id="date" placeholder="yyyy/mm/dd" />
+  </div>
+  <br />
+
+  <div>
+    step4 選擇預約場地
+    <br />
+    <select class="form-control" id="pid">
+      <option value="1176">羽1</option>
+      <option value="1174">羽2</option>
+      <option value="1175">羽3</option>
+    </select>
+  </div>
+  <br />
+
+  <div>
+    step5 選擇預約時段
+    <br />
+    <select class="form-control" id="hour">
+      <option value="6">0600~0700</option>
+      <option value="7">0700~0800</option>
+      <option value="8">0800~0900</option>
+      <option value="9">0900~1000</option>
+      <option value="10">1000~1100</option>
+      <option value="11">1100~1200</option>
+      <option value="12">1200~1300</option>
+      <option value="13">1300~1400</option>
+      <option value="14">1400~1500</option>
+      <option value="15">1500~1600</option>
+      <option value="16">1600~1700</option>
+      <option value="17">1700~1800</option>
+      <option value="18">1800~1900</option>
+      <option value="19">1900~2000</option>
+      <option value="20">2000~2100</option>
+      <option value="21">2100~2200</option>
+    </select>
+  </div>
+  <br />
+
+  <div>
+    step6 確認該日期是已經14天內可以合法預約的 點下方連結一鍵預約
+    <br />
+    如果寫預約失敗 就是被搶走ㄌQQ
+    <br />
+    <a href="" id="link" target="_blank"></a>
+  </div>
+
+  <script>
+    document.querySelector('#date').value = new Date().toLocaleDateString('zh-TW');
+
+    function updateLink() {
+      const pid = document.querySelector('#pid').value;
+      const startHour = document.querySelector('#hour').value;
+      const date = document.querySelector('#date').value;
+
+      const link = `https://scr.cyc.org.tw/tp13.aspx?module=net_booking&files=booking_place&StepFlag=25&QPid=${pid}&QTime=${startHour}&PT=1&D=${date}`
+      document.querySelector('#link').innerHTML = link;
+      document.querySelector('#link').href = link;
+    }
+
+    document.querySelectorAll('.form-control').forEach(function (formControl) {
+      formControl.addEventListener('input', updateLink);
+    });
+    updateLink();
+
+  </script>
+</body>
+
+</html>
